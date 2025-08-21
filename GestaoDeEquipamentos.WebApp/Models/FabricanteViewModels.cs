@@ -12,7 +12,6 @@ public class CadastrarFabricanteViewModel
     {
     }
 }
-
 public class EditarFabricanteViewModel
 {
     public int Id { get; set; }
@@ -32,7 +31,6 @@ public class EditarFabricanteViewModel
         Telefone = telefone;
     }
 }
-
 public class ExcluirFabricanteViewModel
 {
     public int Id { get; set; }
@@ -44,7 +42,6 @@ public class ExcluirFabricanteViewModel
         Nome = nome;
     }
 }
-
 public class VisualizarFabricantesViewModel
 {
     public List<DetalhesFabricanteViewModel> Registros { get; set; }
@@ -53,20 +50,16 @@ public class VisualizarFabricantesViewModel
     {
         Registros = new List<DetalhesFabricanteViewModel>();
 
-        foreach (Fabricante f in fabricantes)
+        foreach (Fabricante fabricante in fabricantes)
         {
             DetalhesFabricanteViewModel detalhesVm = new DetalhesFabricanteViewModel(
-                f.Id,
-                f.Nome,
-                f.Email,
-                f.Telefone
-            );
-            
-            Registros.Add(detalhesVm);
+                fabricante.Id,
+                fabricante.Nome,
+                fabricante.Email,
+                fabricante.Telefone);
         }
     }
 }
-
 public class DetalhesFabricanteViewModel
 {
     public int Id { get; set; }
