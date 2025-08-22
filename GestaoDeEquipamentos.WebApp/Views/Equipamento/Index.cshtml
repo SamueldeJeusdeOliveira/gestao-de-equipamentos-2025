@@ -1,12 +1,10 @@
-﻿@using GestaoDeEquipamentos.Dominio.ModuloFabricante
-@using GestaoDeEquipamentos.WebApp.Models
-
+﻿﻿@using GestaoDeEquipamentos.WebApp.Models
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Visualização de Equipamentos";
 }
 
-@model VisualizarEquipamentoViewModel
+@model VisualizarEquipamentosViewModel
 
 <a class="btn btn-primary" href="/Equipamento/Cadastrar">
     <i class="bi bi-plus"></i>
@@ -21,15 +19,15 @@
                 <div class="card-body">
                     <h5 class="card-title">@e.Nome</h5>
                     <p class="card-text mb-0"><strong>Preço de Aquisição:</strong> @e.PrecoAquisicao.ToString("C2")</p>
-                    <p class="card-text mb-0"><strong>DAta de Fabricação:</strong> @e.DataFabricacao.ToShortTimeString()</p>
+                    <p class="card-text mb-0"><strong>Data de Fabricação:</strong> @e.DataFabricacao.ToShortDateString()</p>
                     <p class="card-text mb-0"><strong>Fabricante:</strong> @e.NomeFabricante</p>
                 </div>
 
                 <div class="card-actions ms-auto me-3 mb-3 d-flex gap-1">
-                    <a class="btn btn-sm btn-primary rounded-circle d-flex justify-content-center align-items-center" style="height: 35px; width: 35px;" href="/Fabricante/Editar/@e.Id">
+                    <a href="/Equipamento/Editar/@e.Id" class="btn btn-sm btn-primary rounded-circle d-flex justify-content-center align-items-center" style="height: 35px; width: 35px;">
                         <i class="bi bi-pencil"></i>
                     </a>
-                    <a class="btn btn-sm btn-danger rounded-circle d-flex justify-content-center align-items-center" style="height: 35px; width: 35px;" href="/Fabricante/Excluir/@e.Id">
+                    <a href="/Equipamento/Excluir/@e.Id" class="btn btn-sm btn-danger rounded-circle d-flex justify-content-center align-items-center" style="height: 35px; width: 35px;">
                         <i class="bi bi-trash2"></i>
                     </a>
                 </div>

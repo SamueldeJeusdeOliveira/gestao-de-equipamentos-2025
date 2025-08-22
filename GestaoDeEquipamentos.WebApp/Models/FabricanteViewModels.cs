@@ -57,6 +57,7 @@ public class VisualizarFabricantesViewModel
                 fabricante.Nome,
                 fabricante.Email,
                 fabricante.Telefone);
+            Registros.Add(detalhesVm);
         }
     }
 }

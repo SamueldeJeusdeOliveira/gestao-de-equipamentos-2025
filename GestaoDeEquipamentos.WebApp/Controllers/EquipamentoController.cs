@@ -23,7 +23,7 @@ namespace GestaoDeEquipamentos.WebApp.Controllers
         {
             List<Equipamento> equipamentos = repositorioEquipamento.SelecionarRegistros();
 
-            VisualizarEquipamentoViewModel visualizarVM = new VisualizarEquipamentoViewModel(equipamentos);
+            VisualizarEquipamentosViewModel visualizarVM = new VisualizarEquipamentosViewModel(equipamentos);
 
             return View(visualizarVM);
         }
@@ -54,7 +54,59 @@ namespace GestaoDeEquipamentos.WebApp.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-    }
-    
-    
+        public IActionResult Editar(int id)
+        {
+            Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(id);
+
+            List<Fabricante> fabricantes = repositorioFabricante.SelecionarRegistros();
+
+            EditarEquipamentoViewModel editarVm = new EditarEquipamentoViewModel(
+                equipamentoSelecionado.Id,
+                equipamentoSelecionado.Nome,
+                equipamentoSelecionado.PrecoAquisicao,
+                equipamentoSelecionado.DataFabricacao,
+                equipamentoSelecionado.Fabricante.Id,
+                fabricantes
+            );
+
+            return View(editarVm);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(int id, EditarEquipamentoViewModel editarVm)
+        {
+            Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(editarVm.FabricanteId);
+
+            Equipamento equipamentoEditado = new Equipamento(
+                editarVm.Nome,
+                editarVm.PrecoAquisicao,
+                editarVm.DataFabricacao,
+                fabricanteSelecionado
+            );
+
+            repositorioEquipamento.EditarRegistro(id, equipamentoEditado);
+
+            return RedirectToAction(nameof(Index));
+        }
+        public IActionResult Excluir(int id)
+        {
+            Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(id);
+
+            List<Fabricante> fabricantes = repositorioFabricante.SelecionarRegistros();
+
+            ExcluirEquipamentoViewModel editarVm = new ExcluirEquipamentoViewModel(
+                equipamentoSelecionado.Id,
+                equipamentoSelecionado.Nome
+            );
+
+            return View(editarVm);
+        }
+        [HttpPost]
+        public IActionResult ExcluirConfirmado(int id)
+        {
+            repositorioEquipamento.ExcluirRegistro(id);
+
+            return RedirectToAction(nameof(Index));
+        }
+    }  
 }
